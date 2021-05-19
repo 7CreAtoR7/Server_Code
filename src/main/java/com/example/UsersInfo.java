@@ -36,7 +36,7 @@ public class UsersInfo {
               Statement stmt = connection.createStatement();
               ResultSet rs = stmt.executeQuery("SELECT * FROM users");
               while (rs.next()) {
-                ls.add(new Users(rs.getString("name"), rs.getString("score")));
+                ls.add(new Users(rs.getString("name"), rs.getInt("score")));
               }
             } catch (Exception e) {
             }

@@ -2,9 +2,9 @@ package com.example;
 
 public class Users {
 	public String name;
-	public String score;
+	public Integer score;
 	
-	public Users(String name, String score) {
+	public Users(String name, Integer score) {
 		this.name=name;
 		this.score=score;
 	}
