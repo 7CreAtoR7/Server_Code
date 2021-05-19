@@ -1,5 +1,6 @@
 package com.example;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,5 +44,19 @@ public class UsersInfo {
             }
         return ls;
     }
+    
+    @RequestMapping(method = RequestMethod.GET,value = "/add")
+    public Boolean add(@RequestBody Users urs) {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("insert into users (name,score) values(?,?)");
+            stmt.setString(1, urs.name);
+            stmt.setInt(2, urs.score);
+          } catch (Exception e) {
+          }
+    	return false;
+    	
+    }
+    
+    
 }
 
