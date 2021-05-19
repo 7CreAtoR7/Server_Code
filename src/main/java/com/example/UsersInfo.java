@@ -58,5 +58,20 @@ public class UsersInfo {
     }
     
     
+    @RequestMapping(method = RequestMethod.GET,value = "/update")
+    public Boolean update(@RequestBody Users urs) {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("UPDATE users SET score = ? where name = ?");
+            stmt.setString(2, urs.name); // ЕСЛИ ЧТО ПОМЕНЯЙ МЕСТАМИ 2 С 1
+            stmt.setInt(1, urs.score); // ЕСЛИ ЧТО ПОМЕНЯЙ МЕСТАМИ 2 С 1
+            int num = stmt.executeUpdate();
+            return num > 0;
+          } catch (Exception e) {
+          }
+    	return false;
+    	
+    }
+    
+    
 }
 
