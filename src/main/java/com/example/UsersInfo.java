@@ -47,6 +47,7 @@ public class UsersInfo {
     
     @RequestMapping(method = RequestMethod.GET,value = "/add")
     public Boolean add(@RequestBody Users urs) {
+    	System.out.println(urs.name);
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("insert into users (name,score) values(?,?)");
             stmt.setString(1, urs.name);
