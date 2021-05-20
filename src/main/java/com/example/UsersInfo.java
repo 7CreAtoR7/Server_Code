@@ -35,8 +35,8 @@ public class UsersInfo {
     public List<Users> list(){
         ArrayList<Users> ls=new ArrayList<Users>();
          try (Connection connection = dataSource.getConnection()) {
-              Statement stmt = connection.createStatement();
-              ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+              Statement stmt = connection.createStatement(); // SELECT * FROM users
+              ResultSet rs = stmt.executeQuery("select * from users order by score desc limit 10");
               while (rs.next()) {
                 ls.add(new Users(rs.getString("name"), rs.getInt("score")));
               }
@@ -47,7 +47,6 @@ public class UsersInfo {
     
     @RequestMapping(method = RequestMethod.POST,value = "/add")
     public Boolean add(@RequestBody Users urs) {
-    	System.out.println(urs.name);
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("insert into users (name,score) values(?,?)");
             stmt.setString(1, urs.name);
