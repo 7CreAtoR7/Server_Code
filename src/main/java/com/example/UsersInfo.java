@@ -45,7 +45,7 @@ public class UsersInfo {
         return ls;
     }
     
-    @RequestMapping(method = RequestMethod.GET,value = "/add")
+    @RequestMapping(method = RequestMethod.POST,value = "/add")
     public Boolean add(@RequestBody Users urs) {
     	System.out.println(urs.name);
         try (Connection connection = dataSource.getConnection()) {
