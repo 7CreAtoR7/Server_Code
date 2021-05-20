@@ -31,7 +31,7 @@ public class UsersInfo {
         return "Hi";
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/list")
+    @RequestMapping(method = RequestMethod.GET,value = "/list_top")
     public List<Users> list(){
         ArrayList<Users> ls=new ArrayList<Users>();
          try (Connection connection = dataSource.getConnection()) {
@@ -44,6 +44,23 @@ public class UsersInfo {
             }
         return ls;
     }
+    
+    
+    
+    @RequestMapping(method = RequestMethod.GET,value = "/list_all")
+    public List<Users> list_all(){
+        ArrayList<Users> ls=new ArrayList<Users>();
+         try (Connection connection = dataSource.getConnection()) {
+              Statement stmt = connection.createStatement(); // SELECT * FROM users
+              ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+              while (rs.next()) {
+                ls.add(new Users(rs.getString("name"), rs.getInt("score")));
+              }
+            } catch (Exception e) {
+            }
+        return ls;
+    }
+    
     
     @RequestMapping(method = RequestMethod.POST,value = "/add")
     public Boolean add(@RequestBody Users urs) {
@@ -64,8 +81,8 @@ public class UsersInfo {
     public Boolean update(@RequestBody Users urs) {
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("UPDATE users SET score = ? where name = ?");
-            stmt.setString(2, urs.name); // ЕСЛИ ЧТО ПОМЕНЯЙ МЕСТАМИ 2 С 1
-            stmt.setInt(1, urs.score); // ЕСЛИ ЧТО ПОМЕНЯЙ МЕСТАМИ 2 С 1
+            stmt.setInt(1, urs.score);
+            stmt.setString(2, urs.name);
             int num = stmt.executeUpdate();
             return num > 0;
           } catch (Exception e) {
