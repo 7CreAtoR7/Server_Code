@@ -36,7 +36,7 @@ public class UsersInfo {
         ArrayList<Users> ls=new ArrayList<Users>();
          try (Connection connection = dataSource.getConnection()) {
               Statement stmt = connection.createStatement(); // SELECT * FROM users
-              ResultSet rs = stmt.executeQuery("select * from users order by score desc limit 10");
+              ResultSet rs = stmt.executeQuery("select * from users order by score desc");
               while (rs.next()) {
                 ls.add(new Users(rs.getString("name"), rs.getInt("score")));
               }
