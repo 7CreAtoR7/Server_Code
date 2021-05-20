@@ -51,6 +51,8 @@ public class UsersInfo {
             PreparedStatement stmt = connection.prepareStatement("insert into users (name,score) values(?,?)");
             stmt.setString(1, urs.name);
             stmt.setInt(2, urs.score);
+            int num = stmt.executeUpdate();
+            return num > 0;
           } catch (Exception e) {
           }
     	return false;
