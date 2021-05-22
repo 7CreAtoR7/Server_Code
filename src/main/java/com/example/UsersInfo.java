@@ -77,7 +77,7 @@ public class UsersInfo {
     }
     
     
-    @RequestMapping(method = RequestMethod.POST,value = "/update")
+    @RequestMapping(method = RequestMethod.PUT,value = "/update")
     public Boolean update(@RequestBody Users urs) {
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("UPDATE users SET score = ? where name = ?");
