@@ -35,7 +35,7 @@ public class UsersInfo {
     public List<Users> list(){
         ArrayList<Users> ls=new ArrayList<Users>();
          try (Connection connection = dataSource.getConnection()) {
-              Statement stmt = connection.createStatement(); // SELECT * FROM users
+              Statement stmt = connection.createStatement();
               ResultSet rs = stmt.executeQuery("select * from users order by score desc");
               while (rs.next()) {
                 ls.add(new Users(rs.getString("name"), rs.getInt("score")));
@@ -51,7 +51,7 @@ public class UsersInfo {
     public List<Users> list_all(){
         ArrayList<Users> ls=new ArrayList<Users>();
          try (Connection connection = dataSource.getConnection()) {
-              Statement stmt = connection.createStatement(); // SELECT * FROM users
+              Statement stmt = connection.createStatement();
               ResultSet rs = stmt.executeQuery("SELECT * FROM users");
               while (rs.next()) {
                 ls.add(new Users(rs.getString("name"), rs.getInt("score")));
